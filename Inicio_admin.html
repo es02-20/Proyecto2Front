@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Inicio</title>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    </head>
+    <body onload=Cargar_info()  id="main">
+        <link href="Front.css" rel="stylesheet" type="text/css">
+        <div style="width: 100%; height: 100%; line-height: 3em; overflow:scroll; border: thin #000 solid; padding: 5px;">
+            <div class="main-menu">
+                <div class="main-menu-form">
+                  <div class="main-menu-btn"><i class="fa fa-bars"></i></div>
+                </div>  
+                <div class="main-menu-content">
+                  <!-- main logo -->
+                  <div class="main-menu-logo">
+                    <h2>Ublog</h2>
+                  </div>
+                  <!-- navigation -->
+                  <ul class="main-menu-nav">
+                    <h1><a id="log"></a></h1>
+                    <li><a onclick=Usuarios() href="#" class="yellow"><i class="fa fa-book fa-fw front"></i>&nbsp; Ver usuarios</a></li>
+                    <li><a onclick=Carga_public() href="#" class="green"><i class="fa fa-folder fa-fw"></i>&nbsp; carga masiva posts</a></li>
+                    <li><a onclick=Carga_us() href="#" class="green"><i class="fa fa-folder fa-fw"></i>&nbsp; carga masiva usuarios</a></li>
+                    <li><a onclick=Salir() href="#" class="purple"><i class="fa fa-envelope fa-fw"></i>&nbsp; salir</a></li>
+                  </ul>
+              
+                  <a href="#" class="main-menu-close"><i class="fa fa-close"></i>&nbsp; Cerrar menu</a>
+                </div>
+              </div>
+              <div class="main-wrapper">
+                <div class="main-content">
+                  <div class="posts">
+                     <h4>Pagina de inicio</h4>
+                  </div>
+                  <p>contenido</p>
+                </div> 
+              </div>
+        
+        
+        </div>
+           
+              
+
+        <script>
+            function Modificar(){
+                location.href="modificar.html"
+            }
+
+            function Cargar_info(){
+              var nombre=document.querySelector('#log')
+              var ini=sessionStorage.username
+              nombre.innerHTML = `Bienvenido  <br>${ini}`
+            }
+        </script>
+        <script>
+            function Salir(){
+                location.href="Front.html"
+            }
+        </script>
+        <script>
+          function Nuevo(){
+            location.href="nuevo_post.html"
+          }
+        </script>
+        <script>
+            function Carga_us(){
+              location.href="Masiva_us.html"
+            }
+          </script>
+          <script>
+            function Carga_public(){
+              location.href="Masiva_post.html"
+            }
+
+            function Usuario(){
+                location.href="Usuarios.html"
+            }
+          </script>
+        <script language="JavaScript" type="text/javascript" src="Front.js"></script> 
+    </body>
+    </html>

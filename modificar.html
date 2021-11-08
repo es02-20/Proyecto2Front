@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <head>
+        <title>Ublog</title>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        
+    </head>
+    <body onload=Cargar_info()  id="main">
+        <link href="Front.css" rel="stylesheet" type="text/css">
+        <style>
+            .titu{
+                background-color: rgba(226, 236, 241, 0.726);
+                 background-size: 100%;
+                font-size: 50px;
+                font-family: 'Roboto', sans-serif;
+                color:rgba(36, 142, 204, 0.726);
+                position: absolute;
+                width: 100%;
+                height: 100%;
+            }
+        </style>
+        <div class="titu" >
+          <div class="text">Ublog</div>
+        </div>
+        <style>
+            .ima{
+                position: relative;
+                left: 10px;
+                top:100px;
+                width: 500px;
+                height:500px;
+            }
+        </style>
+        <div class="ima">
+            <img src="https://logosandtypes.com/wp-content/uploads/2020/08/ubiquiti-network.svg">
+        </div>
+
+        <div class="container">
+          <div class="frontbox">
+            <div class="login">
+                <h2>Modificar datos</h2>
+                <div class="inputbox">
+                  <input type="text" id="genero" placeholder="GENERO">
+                  <input type="text" id= "fullname" name="fullname" placeholder="  NOMBRE">
+                  <input type="text" id = "email" name="email" placeholder="  EMAIL">
+                  <input type="password" id = "passwordn" name="password" placeholder="  CONTRASEÑA">
+                  <input type="text" name="username" id="usernamen" placeholder=" NOMBRE DE USUARIO ">
+                </div>
+                <button onclick=Modificar() id = "registrar" name="registrar"> Modificar</button>
+                <button onclick=Cancelar() id = "Cancelar" name="registrar"> Cancelar</button>
+            </div>
+          </div>
+        </div>
+          <script language="JavaScript" type="text/javascript" src="Front.js"></script> 
+          <script>
+            function Modificar(){
+              
+            }
+
+            function Cancelar(){
+              location.href = "Inicio.html"
+            }
+
+            function Cargar_info(){
+
+            }
+          </script>
+      </body>
+</html>
