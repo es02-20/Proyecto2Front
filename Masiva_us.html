@@ -40,12 +40,35 @@
               <div class="login">
                   <h2>Carga masiva</h2>
                   <div class="inputbox"> 
-                        <button id="seleccion" >Seleccione su archivo</button>
-                        <button id="subir" >Cargar usuarios</button>
+                        <input type="file" id="seleccion">Seleccione su archivo</input>
+                        <p></p>
+                        <button onclick=Cargar() id="subir" >Cargar</button>
+                        <button onclick=Regresar() id="regresar" >Regresar</button>
                       
                   </div>
               </div>
             </div>
           </div>
-      
+      <script>
+         
+              const fromData=new fromData
+              fromData.append("seleccion",document.getElementById("fileLoadMain").files[0]);
+              axios.post(`${this.url}load-users`,FormData,{
+                  "Content-Type":"multipart/form-data",
+              })
+              .then(({ data })=>{
+
+              })
+              .catch(()=>{
+                  console.log("Error");
+              })
+              .finally(()=>{
+                  this.loadLoad = false;
+              })
+          
+
+          function Regresar(){
+                    location.href="inicio_admin.html"
+                }
+      </script>
     </body>

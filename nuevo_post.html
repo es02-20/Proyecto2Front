@@ -38,13 +38,13 @@
               <div class="login">
                   <h2>Nuevo post</h2>
                   <div class="inputbox">
-                    <input id="Archivo" placeholder="Ingrese URL de su archivo">
-                    <input id="" placeholder="Escribe la categoria">
+                    <input id="url" placeholder="Ingrese URL de su archivo">
+                    <input id="categoria" placeholder="Escribe la categoria">
                     <select id="tipo">
                         <option>Foto</option>
                         <option>Video</option>
                       </select>
-                    <button id="publicar" >Publicar</button>
+                    <button oneclick=Publicar() id="publicar" >Publicar</button>
                     
                   </div>
                   <p></p>
@@ -55,7 +55,39 @@
           </div>
       <script>
         function Publicar(){
-
+           var url = document.querySelector('#url').value
+           var dato={
+              'url':url,
+            }
+            console.log(dato)
+            fetch("http://localhost:5000/Nuevo_post",{
+              method:'POST',
+              body:JSON.stringify(dato),
+              headers:{
+                'Content-Type':'application/json'
+              }
+            }).then(res=>res.json())
+            .catch(err=>{
+              console.error('Error ',err)
+              alert("Ocurrio un error, ver en consola")
+            })
+            .then(response=>{
+              console.log(response)
+              console.log(response.message)
+              if (response.message=="015"){
+                alert("Correo ya registrado")
+              }else if  (response.message=="020"){
+                alert("Usuario ya registrado, escriba un nombre de usuario diferente")
+              }else if (response.message=="025"){
+                alert("Registro realizado con exito, Inicie Sesion para continuar")
+                
+              }else if (response.message=="02"){
+                alert("La contraseña debe tener minimo 8 caracteres ")
+              }
+              else if (response.message=="01"){
+                alert("La contraseña debe tener un número ")
+              }
+              })
         }
 
         function Regresar(){

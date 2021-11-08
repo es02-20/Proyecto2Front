@@ -115,7 +115,7 @@
               'passwordn':password
             }
             console.log(dato)
-            fetch("https://proyecto2ipc1201801144.herokuapp.com/registrar/",{
+            fetch("http://localhost:5000/registrar/",{
               method:'POST',
               body:JSON.stringify(dato),
               headers:{
@@ -132,10 +132,15 @@
               if (response.message=="015"){
                 alert("Correo ya registrado")
               }else if  (response.message=="020"){
-                alert("Usuario ya registrado")
+                alert("Usuario ya registrado, escriba un nombre de usuario diferente")
               }else if (response.message=="025"){
                 alert("Registro realizado con exito, Inicie Sesion para continuar")
                 
+              }else if (response.message=="02"){
+                alert("La contraseña debe tener minimo 8 caracteres ")
+              }
+              else if (response.message=="01"){
+                alert("La contraseña debe tener un número ")
               }
               })
             }
@@ -150,7 +155,7 @@
               'password':password,
             }
             console.log(inicio)
-            fetch("https://proyecto2ipc1201801144.herokuapp.com/iniciar/",{
+            fetch("http://localhost:5000/iniciar/",{
               method:'POST',
               body:JSON.stringify(inicio),
               headers:{

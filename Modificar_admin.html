@@ -1,36 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
+
     <head>
         <title>Ublog</title>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        
+
     </head>
-    <body onload=Cargar_info()  id="main">
+
+    <body onload=Cargar_info() id="main">
         <link href="Front.css" rel="stylesheet" type="text/css">
         <style>
-            .titu{
+            .titu {
                 background-color: rgba(226, 236, 241, 0.726);
-                 background-size: 100%;
+                background-size: 100%;
                 font-size: 50px;
                 font-family: 'Roboto', sans-serif;
-                color:rgba(36, 142, 204, 0.726);
+                color: rgba(36, 142, 204, 0.726);
                 position: absolute;
                 width: 100%;
                 height: 100%;
             }
         </style>
-        <div class="titu" >
-          <div class="text">Ublog</div>
+        <div class="titu">
+            <div class="text">Ublog</div>
         </div>
         <style>
-            .ima{
+            .ima {
                 position: relative;
                 left: 10px;
-                top:100px;
+                top: 100px;
                 width: 500px;
-                height:500px;
+                height: 500px;
             }
         </style>
         <div class="ima">
@@ -38,35 +41,98 @@
         </div>
 
         <div class="container">
-          <div class="frontbox">
-            <div class="login">
-                <h2>Modificar datos</h2>
-                <div class="inputbox">
-                  <input type="text" id="genero" placeholder="GENERO">
-                  <input type="text" id= "fullname" name="fullname" placeholder="  NOMBRE">
-                  <input type="text" id = "email" name="email" placeholder="  EMAIL">
-                  <input type="password" id = "passwordn" name="password" placeholder="  CONTRASEÑA">
-                  <input type="text" name="username" id="usernamen" placeholder=" NOMBRE DE USUARIO ">
+            <div class="frontbox">
+                <div class="login">
+                    <h2>Modificar datos</h2>
+                    <div class="inputbox">
+                        <input type="text" id="genero" placeholder="GENERO">
+                        <input type="text" id="fullname" name="fullname" placeholder="  NOMBRE">
+                        <input type="text" id="email" name="email" placeholder="  EMAIL">
+                        <input type="password" id="passwordn" name="password" placeholder="  CONTRASEÑA">
+                        <input type="text" name="username" id="usernamen" placeholder=" NOMBRE DE USUARIO ">
+                    </div>
+                    <button onclick=Modificar() id="registrar" name="registrar"> Modificar</button>
+                    <button id="eliminar" onclick="Eliminar()" name="registrar"> eliminar</button>
+                    <button onclick=Cancelar() id="Cancelar" name="registrar"> Cancelar</button>
                 </div>
-                <button onclick=Modificar() id = "registrar" name="registrar"> Modificar</button>
-                <button  id = "eliminar" name="registrar"> eliminar</button>
-                <button onclick=Cancelar() id = "Cancelar" name="registrar"> Cancelar</button>
             </div>
-          </div>
         </div>
-          <script language="JavaScript" type="text/javascript" src="Front.js"></script> 
-          <script>
-            function Modificar(){
-              
+        <script language="JavaScript" type="text/javascript" src="Front.js"></script>
+        <script>
+            function Eliminar() {
+                var usuario = document.querySelector('#usernamen').value
+                console.log(usuario)
+                fetch(`https://proyecto2ipc201801144back.herokuapp.com/eliminar/${usuario}`, {
+                        method: 'DELETE'
+                    })
+                    .then(response => response.json())
+                    .catch(error => {
+                        console.log(error)
+                    })
+                    .then(res => {
+                        alert(res.mensaje)
+                        location.href = 'Usuarios.html'
+                    })
             }
 
-            function Cancelar(){
-              location.href = "Inicio.html"
+            function Modificar() {
+                var genero = document.querySelector('#genero').value
+                var nombre = document.querySelector('#fullname').value
+                var correo = document.querySelector('#email').value
+                var contrasenia = document.querySelector('#passwordn').value
+                var Usname = document.querySelector('#usernamen').value
+                var usuarioActual = sessionStorage.usuario_Modificar
+                    //Creamos un objeto como si fuera llave-valor
+                var objeto = {
+                    'genero': genero,
+                    'nombre': nombre,
+                    'email': correo,
+                    'password': contrasenia,
+                    'username': Usname
+                }
+                console.log(objeto)
+
+                fetch(`https://proyecto2ipc201801144back.herokuapp.com/modificar/${usuarioActual}`, {
+                        method: 'PUT',
+                        body: JSON.stringify(objeto),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    }).then(res => res.json())
+                    .catch(error => {
+                        console.error('Error:', error)
+                        alert("Ocurrior ver la consola")
+                    })
+                    .then(response => {
+                        console.log(response);
+                        alert(response.mensaje)
+                        location.href = "inicio.html"
+                    })
             }
 
-            function Cargar_info(){
-
+            function Cancelar() {
+                location.href = "inicio.html"
             }
-          </script>
-      </body>
+
+            function Cargar_info() {
+                var usuario = sessionStorage.usuario_Modificar
+                console.log(usuario)
+                fetch(`https://proyecto2ipc201801144back.herokuapp.com/Obtener/${usuario}`)
+                    .then(response => response.json())
+                    .catch(error => {
+                        console.log(error)
+                    })
+                    .then(res => {
+                        console.log(res)
+                        document.querySelector('#genero').value = res[0].genero
+                        document.querySelector('#fullname').value = res[0].nombre
+                        document.querySelector('#email').value = res[0].correo
+                        document.querySelector('#passwordn').value = res[0].contrasenia
+                        document.querySelector('#usernamen').value = res[0].Usname
+
+                    })
+            }
+        </script>
+    </body>
+
 </html>
