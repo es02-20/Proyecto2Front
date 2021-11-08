@@ -115,7 +115,7 @@
               'passwordn':password
             }
             console.log(dato)
-            fetch("http://localhost:5000/registrar/",{
+            fetch("https://proyecto2ipc1201801144.herokuapp.com/registrar/",{
               method:'POST',
               body:JSON.stringify(dato),
               headers:{
@@ -150,7 +150,7 @@
               'password':password,
             }
             console.log(inicio)
-            fetch("http://localhost:5000/iniciar/",{
+            fetch("https://proyecto2ipc1201801144.herokuapp.com/iniciar/",{
               method:'POST',
               body:JSON.stringify(inicio),
               headers:{
