@@ -172,14 +172,14 @@
               if (response.message=="022"){
                 alert(`Bienvenido ${username}`)
                 console.log(sessionStorage.setItem("username",username))
-                location.href="inicio.html"
+                location.href="Inicio.html"
               }else if  (response.message=="023"){
                 alert("Usuario o contraseña no validos")
               }
               else if(response.message=="024"){
                 alert(`Bienvenido ${username}`)
                 sessionStorage.setItem("username",username)
-                location.href="inicio_admin.html"
+                location.href="Inicio_admin.html"
               }
               })
 
